@@ -8,6 +8,7 @@ module.exports = {
     "prettier/react"
   ],
   plugins: ["flowtype", "react", "prettier", "react-native"],
+  parser: "babel-eslint",
   parserOptions: {
     ecmaVersion: 2016,
     sourceType: "module",
