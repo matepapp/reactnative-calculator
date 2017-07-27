@@ -8,6 +8,13 @@ const Styles = StyleSheet.create({
     flex: 2,
     backgroundColor: "#193441"
   },
+  displayText: {
+    color: "white",
+    fontSize: 38,
+    fontWeight: "bold",
+    padding: 20,
+    textAlign: "right"
+  },
   inputContainer: {
     flex: 8,
     backgroundColor: "#3E606F"

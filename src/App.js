@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import Styles from "./Style";
 import InputButton from "./Component/InputButton";
 
@@ -11,6 +11,10 @@ const buttons = [
 ];
 
 export default class App extends Component {
+  state = {
+    inputValue: 0
+  };
+
   renderInputButtons() {
     const views = [];
 
@@ -41,13 +45,26 @@ export default class App extends Component {
   }
 
   onInputButtonPressed(input) {
-    alert(input);
+    switch (typeof input) {
+      case "number":
+        return this.handleNumberInput(input);
+    }
+  }
+
+  handleNumberInput(number) {
+    const inputValue = this.state.inputValue * 10 + number;
+
+    this.setState({ inputValue });
   }
 
   render() {
     return (
       <View style={Styles.rootContainer}>
-        <View style={Styles.displayContainer} />
+        <View style={Styles.displayContainer}>
+          <Text style={Styles.displayText}>
+            {this.state.inputValue}
+          </Text>
+        </View>
         <View style={Styles.inputContainer}>
           {this.renderInputButtons()}
         </View>
