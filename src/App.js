@@ -1,11 +1,13 @@
 import React, { Component } from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
+import Styles from "./Style";
 
 export default class App extends Component {
   render() {
     return (
-      <View>
-        <Text>Hello</Text>
+      <View style={Styles.rootContainer}>
+        <View style={Styles.displayContainer} />
+        <View style={Styles.inputContainer} />
       </View>
     );
   }
