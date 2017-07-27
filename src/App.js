@@ -21,7 +21,13 @@ export default class App extends Component {
       for (let i = 0; i < row.length; i++) {
         const input = row[i];
 
-        inputRow.push(<InputButton value={input} key={`${r}-${i}`} />);
+        inputRow.push(
+          <InputButton
+            value={input}
+            onPress={this.onInputButtonPressed.bind(this, input)}
+            key={`${r}-${i}`}
+          />
+        );
       }
 
       views.push(
@@ -32,6 +38,10 @@ export default class App extends Component {
     }
 
     return views;
+  }
+
+  onInputButtonPressed(input) {
+    alert(input);
   }
 
   render() {
