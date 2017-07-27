@@ -12,7 +12,9 @@ const buttons = [
 
 export default class App extends Component {
   state = {
-    inputValue: 0
+    inputValue: 0,
+    previousInputValue: 0,
+    selectedSymbol: null
   };
 
   renderInputButtons() {
@@ -29,6 +31,7 @@ export default class App extends Component {
           <InputButton
             value={input}
             onPress={this.onInputButtonPressed.bind(this, input)}
+            highlight={this.state.selectedSymbol === input}
             key={`${r}-${i}`}
           />
         );
@@ -48,6 +51,9 @@ export default class App extends Component {
     switch (typeof input) {
       case "number":
         return this.handleNumberInput(input);
+      case "string":
+        return this.handleStringInput(input);
+      default:
     }
   }
 
@@ -55,6 +61,34 @@ export default class App extends Component {
     const inputValue = this.state.inputValue * 10 + number;
 
     this.setState({ inputValue });
+  }
+
+  handleStringInput(string) {
+    switch (string) {
+      case "/":
+      case "*":
+      case "+":
+      case "-":
+        this.setState({
+          selectedSymbol: string,
+          previousInputValue: this.state.inputValue,
+          inputValue: 0
+        });
+        break;
+      case "=":
+        const { inputValue, previousInputValue, selectedSymbol } = this.state;
+
+        if (!selectedSymbol) {
+          break;
+        }
+
+        this.setState({
+          previousInputValue: 0,
+          inputValue: eval(previousInputValue + selectedSymbol + inputValue),
+          selectedSymbol: null
+        });
+        break;
+    }
   }
 
   render() {
